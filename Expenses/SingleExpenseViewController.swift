@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SingleExpenseViewController: UIViewController {
 
@@ -27,6 +28,11 @@ class SingleExpenseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        nameTextField.resignFirstResponder()
+        amountTextField.resignFirstResponder()
+    }
+    
     @IBAction func saveExpense(_ sender: Any) {
         let name = nameTextField.text
         let amountText = amountTextField.text ?? ""
@@ -36,9 +42,7 @@ class SingleExpenseViewController: UIViewController {
         if let expense = Expense(name: name!, amount: amount, date: date) {
             do {
                 let managedContext = expense.managedObjectContext
-                
                 try managedContext?.save()
-                
                 self.navigationController?.popViewController(animated: true)
                 
             }catch{

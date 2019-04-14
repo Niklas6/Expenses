@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ExpensesViewController: UIViewController {
     
@@ -14,19 +15,37 @@ class ExpensesViewController: UIViewController {
     
     let dateFormatter = DateFormatter()
     
+    var expenses = [Expense]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         dateFormatter.timeStyle = .long
         dateFormatter.dateStyle = .long
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<Expense> = Expense.fetchRequest()
+        do {
+            expenses = try managedContext.fetch(fetchRequest)
 
+            expensesTableView.reloadData()
+        } catch{
+            print("Fetch could not be preformed")
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     @IBAction func addNewExpense(_ sender: Any) {
+        performSegue(withIdentifier: "ShowExpense", sender: self)
         
     }
 
@@ -34,11 +53,20 @@ class ExpensesViewController: UIViewController {
 
 extension ExpensesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        print("test")
+        return expenses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("test")
         let cell = expensesTableView.dequeueReusableCell(withIdentifier: "expenseCell", for: indexPath)
+        let expense = expenses[indexPath.row]
+        
+        cell.textLabel?.text = expense.name
+        
+        if let date = expense.date {
+            cell.detailTextLabel?.text = dateFormatter.string(from: date)
+        }
         
         return cell
     }
@@ -47,5 +75,6 @@ extension ExpensesViewController: UITableViewDataSource {
 extension ExpensesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "showExpense", sender: self)
+        
     }
 }
