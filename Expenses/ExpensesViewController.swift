@@ -60,7 +60,23 @@ class ExpensesViewController: UIViewController {
         }
         destination.existingExpense = expenses[selectedRow]
     }
-
+    func deleteExpense(at indexPath: IndexPath) {
+        let expense = expenses[indexPath.row]
+        
+        let managedContext = expense.managedObjectContext {
+            managedContext.delete(expense)
+            
+            do {
+                try managedContext.save()
+                
+                self.expenses.remove(at: indexPath.row)
+                
+                expensesTableView.deleteRows(at: [indexPath], with: .automatic)
+            } catch {
+                print("delete failed")
+            }
+        }
+    }
 }
 
 extension ExpensesViewController: UITableViewDataSource {
