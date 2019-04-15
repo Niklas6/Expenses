@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YWr-Cz-2fg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YWr-Cz-2fg">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Expenses View Controller-->
+        <!--Expenses-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ExpensesViewController" customModule="Expenses" customModuleProvider="target" sceneMemberID="viewController">
@@ -59,7 +58,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="t0n-Ap-yJK">
+                    <navigationItem key="navigationItem" title="Expenses" id="t0n-Ap-yJK">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="hYH-bg-baT">
                             <connections>
                                 <action selector="addNewExpense:" destination="BYZ-38-t0r" id="QQa-4B-BCg"/>
@@ -90,7 +89,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Expense Name..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qU1-aV-nt2">
-                                <rect key="frame" x="74" y="77" width="291" height="30"/>
+                                <rect key="frame" x="74" y="77.5" width="291" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -142,6 +141,7 @@
                         <viewLayoutGuide key="safeArea" id="6C8-ou-NsH"/>
                     </view>
                     <navigationItem key="navigationItem" id="CHA-Hg-eqY">
+                        <barButtonItem key="backBarButtonItem" title="Expense" id="tZh-be-IFc"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="TgS-fZ-iJe">
                             <connections>
                                 <action selector="saveExpense:" destination="6zl-ct-rdA" id="fgQ-8w-6lw"/>
