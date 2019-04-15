@@ -21,7 +21,7 @@ public class Expense: NSManagedObject {
         }
     }
     
-    convenience init?(name: String, amount: Double, date: Date?) {
+    convenience init?(name: String?, amount: Double, date: Date?) {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         guard let managedContext = appDelegate?.persistentContainer.viewContext else {
             return nil

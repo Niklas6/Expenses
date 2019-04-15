@@ -22,6 +22,10 @@ class ExpensesViewController: UIViewController {
 
         dateFormatter.timeStyle = .long
         dateFormatter.dateStyle = .long
+        
+        expensesTableView.delegate = self
+        expensesTableView.dataSource = self
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,17 +52,23 @@ class ExpensesViewController: UIViewController {
         performSegue(withIdentifier: "ShowExpense", sender: self)
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destination = segue.destination as? SingleExpenseViewController,
+            let selectedRow = self.expensesTableView.indexPathForSelectedRow?.row else {
+                return
+        }
+        destination.existingExpense = expenses[selectedRow]
+    }
 
 }
 
 extension ExpensesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("test")
         return expenses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("test")
         let cell = expensesTableView.dequeueReusableCell(withIdentifier: "expenseCell", for: indexPath)
         let expense = expenses[indexPath.row]
         
